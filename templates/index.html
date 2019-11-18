@@ -5,8 +5,15 @@
 	<body>
 	{% block content %}
 	<h2>TIME LINE</h2>
+	
 	<h3>your time line</h3>
-	<p>{{result}}</p>
+	{% for post in posts %}
+	{{ post | safe}}
+	<br><hr>
+	{% endfor %}
+
+	<a href="">read more</a>
+
 	{% endblock %}
 	</body>
 </html>
