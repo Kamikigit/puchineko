@@ -1,0 +1,15 @@
+body {background: #F4F5F7;}
+
+#main{margin: 20px;}
+
+#contents{}
+
+
+@media screen and (min-width:480px) {
+}
+
+@media screen and (min-width:768px) and (max-width:1024px) {
+}
+
+@media screen and (min-width:1024px) {
+}

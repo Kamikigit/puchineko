@@ -1,18 +1,27 @@
 <!DOCTYPE html>
 <html>
 	<head>
+	    <link rel="stylesheet" href="static/style.css" media="screen">
 	</head>
-	<body>
-	{% block content %}
-	<h2>TIME LINE</h2>
-	
-	<h3>your time line</h3>
-	{% for post in posts %}
-	{{ post | safe}}
-	<br><hr>
-	{% endfor %}
 
-	<a href="">read more</a>
+    <body>
+    {% block content %}
+	<div id = "main">
+	    <h2>秋水楓's Time Line</h2>
+	    <div id = "contents">
+            {% for post in posts %}
+	        {{ post.icon | safe}}
+	        {{ post.username | safe }}
+	        {{ post.tweet | safe }}
+	        {{ post.daytime | safe }}
+	        <br>
+		<button type="button">Good</button>
+		<button type="button">Bad</button>
+	        <hr>
+	    {% endfor %}
+	    <a href="">read more</a>
+	    </div>
+	</div>
 
 	{% endblock %}
 	</body>
