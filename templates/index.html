@@ -1,23 +1,31 @@
 <!DOCTYPE html>
 <html>
 	<head>
-	    <link rel="stylesheet" href="static/style.css" media="screen">
+	<link rel="stylesheet" href="static/style.css?[132]" media="screen">
+	<script type="text/javascript" src="static/clicked.js"></script>
 	</head>
 
     <body>
     {% block content %}
 	<div id = "main">
+	<header>
 	    <h2>秋水楓's Time Line</h2>
-	    <div id = "contents">
+	</header>
+	    <hr>
+	    <div id = "contents">  
             {% for post in posts %}
-	        {{ post.icon | safe}}
-	        {{ post.username | safe }}
-	        {{ post.tweet | safe }}
-	        {{ post.daytime | safe }}
-	        <br>
-		<button type="button">Good</button>
-		<button type="button">Bad</button>
-	        <hr>
+	    <div class="post" id="{{ loop.index0 }}">
+	        <div class="icon">{{ post.icon | safe}}</div>
+		<p class="username">{{ post.username }}</p>
+		<p class="tweet">{{ post.tweet }}</p>
+		<span class="daytime">{{ post.daytime }}</span>
+		</div>
+
+		<div class="goodbad">
+			<button class="good" type="button" id="{{ loop.index0 }}" onClick="good(this)">Good</button>
+			<button class="bad" type="button" id="{{loop.index0 }}" onClick="bad(this)">Bad</button>
+		</div>
+		<hr>
 	    {% endfor %}
 	    <a href="">read more</a>
 	    </div>
@@ -26,4 +34,8 @@
 	{% endblock %}
 	</body>
 </html>
+
+
+
+
 
