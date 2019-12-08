@@ -1,0 +1,7 @@
+Flask
+Jinja2
+oauthlib
+requests
+requests-oauthlib
+urllib3
+uwsgi
