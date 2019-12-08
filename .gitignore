@@ -5,3 +5,4 @@ app/nginx_signing.key
 app/src/__pycache__
 app/src/keys.py
 app/vol
+venv
