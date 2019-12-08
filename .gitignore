@@ -1,3 +1,7 @@
-keys.py
-__pycache__
-venv
+app/src/keys.py
+app/__pycache__
+app/gi --pl\033:q
+app/nginx_signing.key
+app/src/__pycache__
+app/src/keys.py
+app/vol
