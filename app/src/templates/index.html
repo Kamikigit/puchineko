@@ -12,24 +12,36 @@
 	    <h2>秋水楓's Time Line</h2>
 	</header>
 	    <hr>
-	    <div id = "contents">  
-            {% for post in posts %}
+	<div id = container>
+	    <div id = "left">
+	    <h3>Good or nomal word's timeline</h3>
+            {% for post in posts_good %}
 	    <div class="post" id="{{ loop.index0 }}">
 	        <div class="icon">{{ post.icon | safe}}</div>
 		<p class="username">{{ post.username }}</p>
 		<p class="tweet">{{ post.tweet }}</p>
 		<span class="daytime">{{ post.daytime }}</span>
-		</div>
+	    </div>
 
-		<div class="goodbad">
-			<button class="good" type="button" id="{{ loop.index0 }}" onClick="good(this)">Good</button>
-			<button class="bad" type="button" id="{{loop.index0 }}" onClick="bad(this)">Bad</button>
-		</div>
 		<hr>
 	    {% endfor %}
 	    <a href="">read more</a>
-	    </div>
-	</div>
+	    </div> <!--left-->
+	    
+	    <div id = "right">
+	    <h3>Bad word's timeline</h3>
+	    {% for post in posts_bad %}
+		<div class="post" id="{{ loop.index0 }}">
+	            <div class="icon">{{ post.icon | safe}}</div>
+		    <p class="username">{{ post.username }}</p>
+		    <p class="tweet">{{ post.tweet }}</p>
+		    <span class="daytime">{{ post.daytime }}</span>
+	        </div>
+	     <hr>
+	     {% endfor %}
+	    </div> <!--right-->
+	</div> <!--container-->
+	</div> <!--main-->
 
 	{% endblock %}
 	</body>

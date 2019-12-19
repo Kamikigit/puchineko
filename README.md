@@ -29,4 +29,5 @@ Flask --- uwsgi --- nginx --- client
     ├── Dockerfile  
     └── nginx.conf  
 
+
 8 directories, 24 files

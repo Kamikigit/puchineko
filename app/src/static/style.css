@@ -10,7 +10,14 @@ header {color: #67c5ff;
 }
 
 
-#contents{}
+#container{}
+
+#left{width: 50%;
+	float: left;}
+
+#right{float: left;
+	width: 50%;}
+
 
 .post{margin: 10px;
 	padding:10px;}

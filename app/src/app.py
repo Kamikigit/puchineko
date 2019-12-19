@@ -3,6 +3,7 @@ import os
 from requests_oauthlib import OAuth1Session
 from flask import Flask, render_template
 import keys
+import hate
 
 twitter = OAuth1Session(keys.CK, keys.CS, keys.AT, keys.ATS)
 
@@ -16,16 +17,25 @@ req = twitter.get(url, params = params)
 def get_post():  # 1ツイごとにposts辞書に格納
     if req.status_code == 200:
         timeline = json.loads(req.text)
-        posts = []
+        posts_good = []
+        posts_bad = []
         for tweet in timeline:
-            dic = {}
-            icon = tweet['user']['profile_image_url_https']
-            dic["icon"] = '<img src=\"' + icon + '\">'
-            dic["username"] = tweet['user']['name']   
-            dic["tweet"] = tweet['text'] 
-            dic["daytime"] = tweet['created_at']
-            posts.append(dic)
-        return render_template('index.html', posts=posts)
+            dic_good = {}
+            dic_bad = {}
+            judge =  [i for i in hate.hate if i in tweet['text']]
+            if len(judge) > 0:
+                icon = tweet['user']['profile_image_url_https']
+                dic_bad["icon"] = '<img src=\"' + icon + '\">'
+                dic_bad["username"] = tweet['user']['name']   
+                dic_bad["tweet"] = tweet['text'] 
+                posts_bad.append(dic_bad)
+            else:
+                icon = tweet['user']['profile_image_url_https']
+                dic_good["icon"] = '<img src=\"' + icon + '\">'
+                dic_good["username"] = tweet['user']['name']   
+                dic_good["tweet"] = tweet['text'] 
+                posts_good.append(dic_good)
+        return render_template('index.html', posts_good=posts_good, posts_bad=posts_bad)
     else:
         return "ERROR: %d" % req.status_code       
 
