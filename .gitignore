@@ -1,11 +1,6 @@
-app/src/keys.py
-app/__pycache__
-app/gi --pl\033:q
-app/nginx_signing.key
-app/src/__pycache__
-app/src/keys.py
-app/vol
-venv
+services/app/puchineko/keys.py
+services/app/puchineko/__pycache__
+services/app/puchineko/__init__.pyc
 
 Backups
 Cache
