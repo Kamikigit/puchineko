@@ -13,3 +13,8 @@ function bad(ele){
 	console.log(word.innerHTML); 
 	word.style.fontSize = '80%';
 };
+
+function search() {
+	var search_catch = document.getElementById("text").value;
+	alert(search_catch);
+}

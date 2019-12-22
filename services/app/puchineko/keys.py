@@ -1,0 +1,7 @@
+CK = "jUNdrzM1uDzrZNapCbLGWeBGk" 
+
+CS = "uIGny3NLYjGCD6B5bvzvesYuvaRV6MEboZD5bdlhkMcaljcjnK"
+
+AT = "1200310073534214145-s4yLbEyFvBQrXqJb1oH5cwU1kN3abd"
+
+ATS = "jnsId4LLdYGeJeXzT3PKWTOVTFJZAYzPBT2qdafwrXh1q"

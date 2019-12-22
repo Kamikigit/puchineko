@@ -4,4 +4,4 @@ oauthlib
 requests
 requests-oauthlib
 urllib3
-uwsgi
+gunicorn

@@ -6,3 +6,9 @@ app/src/__pycache__
 app/src/keys.py
 app/vol
 venv
+
+Backups
+Cache
+User
+rapid_render.json
+storage.json
