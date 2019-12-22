@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<link rel="stylesheet" href="/static/style.css?[132]" media="screen">
+	<script type="text/javascript" src="static/clicked.js"></script>
+	</head>
+
+    <body>
+    {% block content %}
+	<div id = "main">
+	<header>
+	    <h2>～～の検索結果</h2>
+		<form method="POST" action="/api/search/">
+			<input type="text" name="text_name" id="text">
+			<input type="submit" value="検索" onclick="search()">
+		</form>
+	</header>
+	    <hr>
+	<div id = container>
+	    <div id = "left">
+	    <h3>Good or nomal word's timeline</h3>
+            {% for post in posts_good %}
+	    <div class="post" id="{{ loop.index0 }}">
+	        <div class="icon">{{ post.icon | safe}}</div>
+		<p class="username">{{ post.username }}</p>
+        {% autoescape false %}
+		<p class="tweet">{{ post.tweet | safe }}</p>
+        {% endautoescape %}
+		<span class="daytime">{{ post.daytime }}</span>
+	    </div>
+
+		<hr>
+	    {% endfor %}
+	    <a href="">read more</a>
+	    </div> <!--left-->
+	    
+	    <div id = "right">
+	    <h3>Bad word's timeline</h3>
+	    {% for post in posts_bad %}
+		<div class="post" id="{{ loop.index0 }}">
+	            <div class="icon">{{post.icon|safe}}</div>
+		    <p class="username">{{ post.username }}</p>
+		    <p class="tweet">{{post.tweet}}</p>
+		    <span class="daytime">{{ post.daytime }}</span>
+	        </div>
+	     <hr>
+	     {% endfor %}
+	    </div> <!--right-->
+	</div> <!--container-->
+	</div> <!--main-->
+
+	{% endblock %}
+	</body>
+</html>
+
+
+
+
+
