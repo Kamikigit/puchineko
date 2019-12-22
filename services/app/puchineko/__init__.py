@@ -1,5 +1,9 @@
 from flask import (
-    Flask, jsonify, send_from_directory, render_template
+    Flask,
+    jsonify,
+    send_from_directory,
+    render_template
+)
 import json
 import os
 from requests_oauthlib import OAuth1Session
