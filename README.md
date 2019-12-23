@@ -34,3 +34,13 @@ webコンテナのpythonを起動。
 ```
 $ docker-compose run web python3
 ```
+
+## taggerの利用
+辞書は`/usr/lib/x86_64-linux-gnu/mecab/dic/mecab-ipadic-neologd`にインストールされている。
+
+```python3
+from MeCab import Tagger
+
+mecab = Tagger("-d /usr/lib/x86_64-linux-gnu/mecab/dic/mecab-ipadic-neologd")
+
+```
