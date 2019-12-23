@@ -5,3 +5,4 @@ requests
 requests-oauthlib
 urllib3
 gunicorn
+mecab-python3
