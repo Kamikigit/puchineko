@@ -9,7 +9,7 @@
     {% block content %}
 	<div id = "main">
 	<header>
-	    <h2>～～の検索結果</h2>
+	<h2>{{ search_word }}の検索結果</h2>
 		<form method="POST" action="/api/search/">
 			<input type="text" name="text_name" id="text">
 			<input type="submit" value="検索" onclick="search()">

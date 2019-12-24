@@ -10,6 +10,7 @@ import os
 from requests_oauthlib import OAuth1Session
 from puchineko import keys, hate
 from puchineko.utils import text2link
+import oseti
 
 twitter = OAuth1Session(keys.CK, keys.CS, keys.AT, keys.ATS)
 
@@ -23,26 +24,7 @@ req = twitter.get(url, params = params)
 @app.route('/')
 def get_post():  # 1ツイごとにposts辞書に格納
     if req.status_code == 200:
-        timeline = json.loads(req.text)
-        posts_good = []
-        posts_bad = []
-        for tweet in timeline:
-            dic_good = {}
-            dic_bad = {}
-            judge =  [i for i in hate.hate if i in tweet['text']]
-            if len(judge) > 0:
-                icon = tweet['user']['profile_image_url_https']
-                dic_bad["icon"] = '<img src=\"' + icon + '\">'
-                dic_bad["username"] = tweet['user']['name']   
-                dic_bad["tweet"] = text2link(tweet['text'], tweet['entities']) 
-                posts_bad.append(dic_bad)
-            else:
-                icon = tweet['user']['profile_image_url_https']
-                dic_good["icon"] = '<img src=\"' + icon + '\">'
-                dic_good["username"] = tweet['user']['name']   
-                dic_good["tweet"] = text2link(tweet['text'], tweet['entities']) 
-                posts_good.append(dic_good)
-        return render_template('index.html', posts_good=posts_good, posts_bad=posts_bad)
+        return render_template('index.html')
     else:
         return "ERROR: %d" % req.status_code   
 
@@ -53,30 +35,34 @@ def search():
     params = {
         'q': search_word,
         'count': 20,
+        'lang':'ja',
         'result_type': 'mixed'
     }
     req = twitter.get(url, params=params)
+    analyzer = oseti.Analyzer()
+    
     if req.status_code == 200:
         timeline = json.loads(req.text)
         posts_good = []
         posts_bad = []
         for tweet in timeline["statuses"]:
-            dic_good = {}
-            dic_bad = {}
-            judge =  [i for i in hate.hate if i in tweet['text']]
-            if len(judge) > 0:
-                icon = tweet['user']['profile_image_url_https']
-                dic_bad["icon"] = '<img src=\"' + icon + '\">'
-                dic_bad["username"] = tweet['user']['name']   
-                dic_bad["tweet"] = text2link(tweet['text'], tweet['entities']) 
-                posts_bad.append(dic_bad)
+            dic = {}
+            icon = tweet['user']['profile_image_url_https']
+            dic["icon"] = '<img src=\"' + icon + '\">'
+            dic["username"] = tweet['user']['name']   
+            dic["tweet"] = text2link(tweet['text'], tweet['entities']) 
+            result = analyzer.analyze(dic["tweet"])
+            point = 0
+            if len(result) > 1:
+                point = sum(result) / len(result)
             else:
-                icon = tweet['user']['profile_image_url_https']
-                dic_good["icon"] = '<img src=\"' + icon + '\">'
-                dic_good["username"] = tweet['user']['name']   
-                dic_good["tweet"] = text2link(tweet['text'], tweet['entities']) 
-                posts_good.append(dic_good)
-        return render_template('search.html', posts_good=posts_good, posts_bad=posts_bad)
+                point = result[0]
+
+            if point >= 0:
+                posts_good.append(dic)
+            else:
+                posts_bad.append(dic)
+        return render_template('search.html', posts_good=posts_good, posts_bad=posts_bad, search_word=search_word)
     else:
         return "ERROR: %d" % req.status_code
 
